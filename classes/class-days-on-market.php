@@ -294,7 +294,7 @@ class DaysOnMarket {
 					global $post;
 					$args         = [
 						'posts_per_page' => 20,
-						'post_type'      => 'pf_valuator',
+						'post_type'      => $v['default'],
 						'post_status'    => 'publish'
 					];
 					$custom_posts = get_posts( $args );
@@ -444,9 +444,9 @@ function get_custom_fields_settings( $meta_box )
 		$fields['call_to_action'] = [
 			'name'        => __( 'Your Call To Action', $this->token ),
 			'description' => __( 'The call to action for users to give you their contact information.', $this->token ),
-			'placeholder' => __( 'Search', $this->token ),
+			'placeholder' => __( 'Get My Results!', $this->token ),
 			'type'        => 'text',
-			'default'     => 'Search',
+			'default'     => 'Get My Results!',
 			'section'     => 'info'
 		];
 
