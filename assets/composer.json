@@ -1,0 +1,13 @@
+{
+  "name": "coldturkeygroup/daysonmarket",
+  "description": "Days On Market Plugin for Platform",
+  "license": "proprietary",
+  "require": {
+    "guzzlehttp/guzzle": "~4.0"
+  },
+  "autoload": {
+    "classmap": [
+      "../classes"
+    ]
+  }
+}
