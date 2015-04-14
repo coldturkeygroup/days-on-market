@@ -334,7 +334,7 @@
 
 <body style="background-color:#FFFFFF;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;margin:0;padding:0;height:100% ;width:100% ;">
 
-<span class="preheader" style="color:transparent;display:none ;visibility:hidden;opacity:0;height:0;width:0;">You have a new House Hunter submission - here is their info:</span>
+<span class="preheader" style="color:transparent;display:none ;visibility:hidden;opacity:0;height:0;width:0;">You have a new Days on Market funnel submission - here is their info:</span>
 
 <center>
 	<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="background-color:#FFFFFF;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;margin:0;padding:0;border-collapse:collapse ;height:100% ;width:100% ;">

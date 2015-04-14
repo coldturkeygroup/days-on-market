@@ -609,10 +609,8 @@ class DaysOnMarket {
 	 *
 	 * @param $user_id
 	 */
-	protected
-	function emailResultsToAdmin(
-		$user_id
-	) {
+	protected function emailResultsToAdmin( $user_id )
+	{
 		// Get the prospect data saved previously
 		global $wpdb;
 		$subscriber = $wpdb->get_row( 'SELECT * FROM ' . $this->table_name . ' WHERE id = \'' . $user_id . '\' ORDER BY id DESC LIMIT 0,1' );
@@ -638,8 +636,7 @@ class DaysOnMarket {
 	 *
 	 * @return json
 	 */
-	public
-	function process_submission()
+	public function process_submission()
 	{
 		if ( isset( $_POST[ $this->token . '_nonce' ] ) && wp_verify_nonce( $_POST[ $this->token . '_nonce' ], $this->token . '_submit_form' ) ) {
 			global $wpdb;
@@ -709,10 +706,8 @@ class DaysOnMarket {
 	 *
 	 * @return string
 	 */
-	public
-	function change_default_title(
-		$title
-	) {
+	public function change_default_title( $title )
+	{
 		$screen = get_current_screen();
 
 		if ( $this->token == $screen->post_type ) {
@@ -726,8 +721,7 @@ class DaysOnMarket {
 	 * Remove the specified leads from the
 	 * leads table and the database.
 	 */
-	public
-	function remove_leads()
+	public function remove_leads()
 	{
 		global $wpdb;
 		$leads_to_delete = implode( ',', $_POST['delete_lead'] );
