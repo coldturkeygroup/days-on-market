@@ -384,8 +384,8 @@
 								<tr>
 									<td align="center" valign="top" class="bodyContent" style="padding: 10px 30px 0;font-family: Verdana, Arial, Helvetica, sans-serif;text-align: left;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #3A3A3A;font-size: 16px;font-weight: normal;line-height: 169%;-webkit-font-smoothing: antialiased;">
                     <span class="notlook"><p>
-		                    <strong>Name:</strong><?= $subscriber->first_name ?><br>
-		                    <strong>Email:</strong><?= $subscriber->email ?>
+		                    <strong>Name: </strong><?= $subscriber->first_name ?><br>
+		                    <strong>Email: </strong><?= $subscriber->email ?>
 	                    </p></span>
 									</td>
 								</tr>
@@ -404,7 +404,7 @@
 	                      <strong>Location: </strong><?= $subscriber->property_location ?><br>
 	                      <strong># Bedrooms: </strong><?= $subscriber->num_beds ?><br>
 	                      <strong># Bathrooms: </strong><?= $subscriber->num_baths ?><br>
-	                      <strong>Square Feet: </strong><?= $subscriber->sq_feet ?><br>
+	                      <strong>Square Feet: </strong><?= number_format( $subscriber->sq_feet ) ?><br>
 	                      <strong>Features: </strong><?= nl2br( $subscriber->features ) ?><br>
 	                      <strong>Desired Sales Price: </strong>$<?= number_format( $subscriber->desired_price ) ?><br>
                       </p>

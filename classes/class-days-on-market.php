@@ -648,7 +648,7 @@ class DaysOnMarket {
 			$location      = sanitize_text_field( $_POST['location'] );
 			$num_beds      = sanitize_text_field( $_POST['num_beds'] );
 			$num_baths     = sanitize_text_field( $_POST['num_baths'] );
-			$sq_ft         = sanitize_text_field( $_POST['sq_ft'] );
+			$sq_ft         = str_replace( ',', '', sanitize_text_field( $_POST['sq_ft'] ) );
 			$features      = sanitize_text_field( $_POST['features'] );
 			$desired_price = str_replace( ',', '', sanitize_text_field( $_POST['desired_price'] ) );
 
