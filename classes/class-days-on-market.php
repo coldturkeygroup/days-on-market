@@ -299,7 +299,12 @@ class DaysOnMarket {
 					];
 					$custom_posts = get_posts( $args );
 					foreach ( $custom_posts as $post ) : setup_postdata( $post );
-						$html .= '<option value="' . str_replace( home_url(), '', get_permalink() ) . '">' . get_the_title() . '</option>';
+						$link     = str_replace( home_url(), '', get_permalink() );
+						$selected = '';
+						if ( $link == $data )
+							$selected = 'selected';
+
+						$html .= '<option value="' . $link . '" ' . $selected . '>' . get_the_title() . '</option>';
 					endforeach;
 					wp_reset_postdata();
 

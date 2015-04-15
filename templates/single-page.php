@@ -94,10 +94,8 @@ if ( $hover_setting && $hover_setting != '' )
 				</div>
 				<div class="col-sm-5">
 					Hey, it's <?= $name ?>. I will send you an custom report within the next 24 hours. <br>
-					Thanks
-					for using the listing calculator tool! <br> <strong>I'll email you a custom link as soon as I've researched
-						the
-						time on market that is expected for your home.</strong>
+					Thanks for using the listing calculator tool! <br> <strong>I'll email you a custom link as soon as I've researched
+						how long it will take to sell your home.</strong>
 					<?php if ( $valuator_link != '' ) { ?>
 						<br> Oh, and one more thing. If you're thinking about selling your home this year, try out my <strong>Home
 							Valuator</strong> to find out what your home is really worth.
@@ -169,9 +167,9 @@ if ( $hover_setting && $hover_setting != '' )
 						<div class="modal-body">
 							<h1>Where should we send your results?</h1>
 
-							<p>Expected days on market for a <span id="sq_ft-answer"></span> square foot
-								<span id="type-answer"></span> with
-								<span id="num_beds-answer"></span> bedrooms and <span id="num_baths-answer"></span> bathrooms located in
+							<p>How long will it take to sell a <span id="sq_ft-answer"></span> square foot
+								<span id="type-answer"></span> (
+								<span id="num_beds-answer"></span> bedrooms, <span id="num_baths-answer"></span> bathrooms) located in
 								<span id="location-answer"></span>.</p>
 
 							<div class="form-group" style="margin-top:20px">
@@ -188,7 +186,7 @@ if ( $hover_setting && $hover_setting != '' )
 							<?php wp_nonce_field( 'pf_days_on_market_submit_form', 'pf_days_on_market_nonce' ); ?>
 						</div>
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary btn-block" id="submit-results">Send Me My Results</button>
+							<button type="submit" class="btn btn-primary btn-block" id="submit-results">See My Results</button>
 						</div>
 					</div>
 				</div>
