@@ -1,0 +1,18 @@
+{
+  "name": "coldturkeygroup/days-on-market",
+  "description": "A form for prospective home sellers to fill out to figure out how long it might take them to sell their home.",
+  "homepage": "http://coldturkeygroup.com/",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Cold Turkey Group",
+      "email": "support@coldturkeygroup.com",
+      "homepage": "https://coldturkeygroup.com"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.4.0",
+    "composer/installers": "v1.0.12"
+  }
+}
