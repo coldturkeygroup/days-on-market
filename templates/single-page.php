@@ -94,12 +94,13 @@ if ( $hover_setting && $hover_setting != '' )
 				</div>
 				<div class="col-sm-5">
 					Hey, it's <?= $name ?>. I will send you an custom report within the next 24 hours. <br>
-					Thanks for using the listing calculator tool! <br> <strong>I'll email you a custom link as soon as I've researched
+					Thanks for using the listing calculator tool! <br> <strong>I'll email you a custom link as soon as I've
+						researched
 						how long it will take to sell your home.</strong>
 					<?php if ( $valuator_link != '' ) { ?>
-						<br> Oh, and one more thing. If you're thinking about selling your home this year, try out my <strong>Home
-							Valuator</strong> to find out what your home is really worth.
-						<a href="<?= $valuator_link ?>" class="btn btn-primary btn-block">Try the Home Valuator</a>
+						<br> Oh, and one more thing. Would you like to find out what your home is worth?
+						<br> (Instant home value report is automatically calculated based on recent sold listings in your area.)
+						<a href="<?= $valuator_link ?>" class="btn btn-primary btn-block">See What My Home Is Worth</a>
 					<?php } ?>
 				</div>
 			</div>
