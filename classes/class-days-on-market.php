@@ -623,6 +623,7 @@ class DaysOnMarket {
 		// Format the email and send it
 		$admin_email = get_bloginfo( 'admin_email' );
 		$headers[]   = 'From: Platform <info@platform.marketing>';
+		$headers[]   = 'Reply-To: ' . $subscriber->email;
 		$headers[]   = 'Content-Type: text/html; charset=UTF-8';
 		$subject     = 'New Days on Market Funnel Submission';
 		// Load template into message
