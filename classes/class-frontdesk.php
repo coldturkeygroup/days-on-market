@@ -52,6 +52,7 @@ class FrontDesk {
 						'key'         => $this->api_key,
 						'title'       => $title,
 						'description' => 'Campaign for Platform Days on Market Funnel',
+						'type'        => 'Platform',
 						'total_cost'  => '10000',
 						'source'      => $permalink
 					]
