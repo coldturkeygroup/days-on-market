@@ -51,8 +51,9 @@ if ( $hover_setting && $hover_setting != '' )
 		<?php wp_head(); ?>
 		<style>
 			.single-pf_days_on_market {
-				background-size: cover;
 				background: url(<?= $img[0]; ?>) no-repeat fixed center center;
+				background-size: cover;
+				background-attachment: fixed;
 			}
 
 			<?php
