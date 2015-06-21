@@ -425,6 +425,10 @@ class DaysOnMarket
                 'jquery'
             ], DAYS_MARKET_PLUGIN_VERSION);
             wp_enqueue_script($this->token . '-js');
+            wp_register_script('mailcheck', esc_url($this->assets_url . 'js/mailcheck.min.js'), [
+                'jquery'
+            ], DAYS_MARKET_PLUGIN_VERSION);
+            wp_enqueue_script('mailcheck');
 
             $localize = [
                 'ajaxurl' => admin_url('admin-ajax.php')
