@@ -6,6 +6,14 @@ jQuery('document').ready(function ($) {
         $('.btn-primary').removeAttr('disabled');
     });
 
+    var delay = (function () {
+        var timer = 0;
+        return function (callback, ms) {
+            clearTimeout(timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
+
     // Mailcheck
     $('#email').on('keyup', function () {
         var input = $(this);
@@ -99,29 +107,29 @@ jQuery('document').ready(function ($) {
             },
             async: true,
             success: function (response) {
-                var conversion = $('#conversion').val();
-
-                if (conversion !== '') {
-                    (function () {
-                        var _fbq = window._fbq || (window._fbq = []);
-                        if (!_fbq.loaded) {
-                            var fbds = document.createElement('script');
-                            fbds.async = true;
-                            fbds.src = '//connect.facebook.net/en_US/fbds.js';
-                            var s = document.getElementsByTagName('script')[0];
-                            s.parentNode.insertBefore(fbds, s);
-                            _fbq.loaded = true;
-                        }
-                    })();
-                    window._fbq = window._fbq || [];
-                    window._fbq.push(['track', conversion, {'value': '0.00', 'currency': 'USD'}]);
-                }
-
                 setTimeout(function () {
                     $('#get-results-modal').modal('hide');
                     $('body').removeClass('modal-open');
                     $('#days-on-market,.modal-backdrop').remove();
                     $('.results').show();
+
+                    var conversion = $('#conversion').val();
+
+                    if (conversion !== '') {
+                        (function () {
+                            var _fbq = window._fbq || (window._fbq = []);
+                            if (!_fbq.loaded) {
+                                var fbds = document.createElement('script');
+                                fbds.async = true;
+                                fbds.src = '//connect.facebook.net/en_US/fbds.js';
+                                var s = document.getElementsByTagName('script')[0];
+                                s.parentNode.insertBefore(fbds, s);
+                                _fbq.loaded = true;
+                            }
+                        })();
+                        window._fbq = window._fbq || [];
+                        window._fbq.push(['track', conversion, {'value': '0.00', 'currency': 'USD'}]);
+                    }
                 }, 1000);
             }
         });
