@@ -554,6 +554,9 @@ class DaysOnMarket
     {
         // Single house hunter page template
         if (is_single() && get_post_type() == $this->token) {
+            if (!defined('PLATFORM_FUNNEL'))
+                define('PLATFORM_FUNNEL', 'DAYS_MARKET');
+
             include($this->template_path . 'single-page.php');
             exit;
         }
