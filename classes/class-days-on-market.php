@@ -311,6 +311,26 @@ class DaysOnMarket
 
                     $html .= '</select><p class="description">' . $v['description'] . '</p>' . "\n";
                     $html .= '</td><tr/>' . "\n";
+                } elseif ($type == 'select') {
+                    $html .= '<tr valign="top"><th scope="row"><label for="' . esc_attr($k) . '">' . $v['name'] . '</label></th><td>';
+                    $html .= '<select style="width:100%" name="' . esc_attr($k) . '" id="' . esc_attr($k) . '">';
+                    foreach ($v['options'] as $option) {
+                        $selected = '';
+                        if ($option == $data)
+                            $selected = 'selected';
+
+                        $html .= '<option value="' . $option . '" ' . $selected . '>' . ucfirst($option) . '</option>';
+                    }
+                    $html .= '</select>';
+                    if ($k == 'area') {
+                        $area_custom_val = '';
+                        if (isset($fields['area_custom'])) {
+                            $area_custom_val = 'value="' . esc_attr($fields['area_custom'][0]) . '"';
+                        }
+                        $html .= '<input type="text" name="area_custom" id="area_custom" ' . $area_custom_val . ' placeholder="Your Custom Area" style="width:100%;display:none;">';
+                    }
+                    $html .= '<p class="description">' . $v['description'] . '</p>' . "\n";
+                    $html .= '</td><tr/>' . "\n";
                 } elseif ($type == 'url') {
                     $html .= '<tr valign="top"><th scope="row"><label for="' . esc_attr($k) . '">' . $v['name'] . '</label></th><td><input type="button" class="button" id="upload_media_file_button" value="' . __('Upload Image', $this->token) . '" data-uploader_title="Choose an image" data-uploader_button_text="Insert image file" /><input name="' . esc_attr($k) . '" type="text" id="upload_media_file" class="regular-text" value="' . esc_attr($data) . '" />' . "\n";
                     $html .= '<p class="description">' . $v['description'] . '</p>' . "\n";
