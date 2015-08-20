@@ -215,7 +215,7 @@ class DaysOnMarket_Admin {
 		}
 
 		echo '<div class="wrap" id="' . $this->token . '_settings">
-					<h2>' . __( 'Days on Market Funnel Settings', $this->token ) . '</h2>
+					<h1>' . __( 'Days on Market Funnel Settings', $this->token ) . '</h1>
 					<form method="post" action="options.php" enctype="multipart/form-data">
 						<div class="clear"></div>';
 
@@ -243,7 +243,7 @@ class DaysOnMarket_Admin {
 
 		?>
 		<div class="wrap" id="<?= $this->token; ?>_leads">
-			<h2>Days on Market Funnel Leads</h2>
+			<h1>Days on Market Funnel Leads</h1>
 
 			<?php
 			if ( isset( $_GET['deleted'] ) && $_GET['deleted'] == true )

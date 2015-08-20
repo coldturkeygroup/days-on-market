@@ -455,12 +455,40 @@ class DaysOnMarket
         $fields = [];
 
         if ($meta_box == 'basic' || $meta_box == 'all') {
+            $fields['headline'] = [
+                'name' => __('Headline', $this->token),
+                'description' => __('The headline for your page.', $this->token),
+                'placeholder' => __('Listing Calculator', $this->token),
+                'type' => 'text',
+                'default' => 'Listing Calculator',
+                'section' => 'info'
+            ];
+
+            $fields['subheadline'] = [
+                'name' => __('Sub-Headline', $this->token),
+                'description' => __('The sub-headline for your page.', $this->token),
+                'placeholder' => __('How long will it take to sell my home?', $this->token),
+                'type' => 'text',
+                'default' => 'How long will it take to sell my home?',
+                'section' => 'info'
+            ];
+
             $fields['call_to_action'] = [
                 'name' => __('Your Call To Action', $this->token),
                 'description' => __('The call to action for users to give you their contact information.', $this->token),
                 'placeholder' => __('Get My Results!', $this->token),
                 'type' => 'text',
                 'default' => 'Get My Results!',
+                'section' => 'info'
+            ];
+
+            $fields['show_sqft'] = [
+                'name' => __('Show Square Footage Field', $this->token),
+                'description' => __('If set to no, the square footage field will not be shown', $this->token),
+                'placeholder' => '',
+                'type' => 'select',
+                'default' => 'yes',
+                'options' => ['no', 'yes'],
                 'section' => 'info'
             ];
 
@@ -652,12 +680,12 @@ class DaysOnMarket
      * Create a DB record for the user, and return the ID.
      * Create a prospect on tryfrontdesk.com with the given data.
      *
-     * @return json
      */
     public function process_submission()
     {
         if (isset($_POST[$this->token . '_nonce']) && wp_verify_nonce($_POST[$this->token . '_nonce'], $this->token . '_submit_form')) {
             global $wpdb;
+            $sq_ft = 0;
             $blog_id = get_current_blog_id();
             $first_name = sanitize_text_field($_POST['first_name']);
             $email = sanitize_text_field($_POST['email']);
@@ -666,9 +694,11 @@ class DaysOnMarket
             $location = sanitize_text_field($_POST['location']);
             $num_beds = sanitize_text_field($_POST['num_beds']);
             $num_baths = sanitize_text_field($_POST['num_baths']);
-            $sq_ft = str_replace(',', '', sanitize_text_field($_POST['sq_ft']));
             $features = sanitize_text_field($_POST['features']);
             $desired_price = str_replace(',', '', sanitize_text_field($_POST['desired_price']));
+            if (isset($_POST['sq_ft'])) {
+                $sq_ft = str_replace(',', '', sanitize_text_field($_POST['sq_ft']));
+            }
 
             $wpdb->query($wpdb->prepare(
                 'INSERT INTO ' . $this->table_name . '
