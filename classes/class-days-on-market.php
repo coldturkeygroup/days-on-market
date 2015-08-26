@@ -361,10 +361,7 @@ class DaysOnMarket
      *
      * @return int
      */
-    public
-    function meta_box_save(
-        $post_id
-    )
+    public function meta_box_save($post_id)
     {
         // Verify
         if ((get_post_type() != $this->token) || !wp_verify_nonce($_POST[$this->token . '_nonce'], plugin_basename($this->dir)))
@@ -403,8 +400,7 @@ class DaysOnMarket
      * used for our scripts in the dashboard.
      *
      */
-    public
-    function enqueue_admin_styles()
+    public function enqueue_admin_styles()
     {
         wp_enqueue_style('wp-color-picker');
     }
@@ -413,8 +409,7 @@ class DaysOnMarket
      * Register the Javascript files that will be
      * used for our scripts in the dashboard.
      */
-    public
-    function enqueue_admin_scripts()
+    public function enqueue_admin_scripts()
     {
         // Admin JS
         wp_register_script($this->token . '-admin', esc_url($this->assets_url . 'js/admin.js'), [
@@ -428,8 +423,7 @@ class DaysOnMarket
      * Register the Javascript files that will be
      * used for our templates.
      */
-    public
-    function enqueue_scripts()
+    public function enqueue_scripts()
     {
         if (is_singular($this->token)) {
             wp_register_style($this->token, esc_url($this->assets_url . 'css/daysonmarket.css'), [], DAYS_MARKET_PLUGIN_VERSION);
@@ -467,10 +461,7 @@ class DaysOnMarket
      *
      * @return mixed
      */
-    public
-    function get_custom_fields_settings(
-        $meta_box
-    )
+    public function get_custom_fields_settings($meta_box)
     {
         $fields = [];
 
@@ -502,6 +493,33 @@ class DaysOnMarket
                 'section' => 'info'
             ];
 
+            $fields['modal_title'] = [
+                'name' => __('Modal Title', $this->token),
+                'description' => __('The title for the modal shown after CTA button is clicked.', $this->token),
+                'placeholder' => __('Get My Results!', $this->token),
+                'type' => 'text',
+                'default' => 'Where should we send your results?',
+                'section' => 'info'
+            ];
+
+            $fields['modal_subtitle'] = [
+                'name' => __('Modal Subtitle', $this->token),
+                'description' => __('The subtitle for the modal shown after CTA button is clicked.', $this->token),
+                'placeholder' => '',
+                'type' => 'text',
+                'default' => 'How long will it take to sell a <span id="sq_ft-answer"></span> square foot <span id="type-answer"></span> (<span id="num_beds-answer"></span> bedrooms, <span id="num_baths-answer"></span> bathrooms) located in <span id="location-answer"></span>.',
+                'section' => 'info'
+            ];
+
+            $fields['modal_button'] = [
+                'name' => __('Modal Button', $this->token),
+                'description' => __('The submit button text for the modal shown after CTA button is clicked.', $this->token),
+                'placeholder' => __('See My Results', $this->token),
+                'type' => 'text',
+                'default' => 'See My Results',
+                'section' => 'info'
+            ];
+
             $fields['show_sqft'] = [
                 'name' => __('Show Square Footage Field', $this->token),
                 'description' => __('If set to no, the square footage field will not be shown', $this->token),
@@ -509,6 +527,15 @@ class DaysOnMarket
                 'type' => 'select',
                 'default' => 'yes',
                 'options' => ['no', 'yes'],
+                'section' => 'info'
+            ];
+
+            $fields['city_placeholder'] = [
+                'name' => __('City Input Placeholder', $this->token),
+                'description' => __('The placeholder to be shown in the City field before a user enters any text.', $this->token),
+                'placeholder' => __('Chicago', $this->token),
+                'type' => 'text',
+                'default' => 'Chicago',
                 'section' => 'info'
             ];
 
@@ -597,8 +624,7 @@ class DaysOnMarket
      * are used for our plugin.
      *
      */
-    public
-    function page_templates()
+    public function page_templates()
     {
         // Single house hunter page template
         if (is_single() && get_post_type() == $this->token) {
@@ -618,10 +644,7 @@ class DaysOnMarket
      *
      * @return bool|string
      */
-    public
-    function get_media_file(
-        $pageID
-    )
+    public function get_media_file($pageID)
     {
         if ($pageID) {
             $file = get_post_meta($pageID, 'media_file', true);
@@ -641,10 +664,7 @@ class DaysOnMarket
      *
      * @return bool
      */
-    public
-    function create_frontdesk_campaign(
-        $post_ID
-    )
+    public function create_frontdesk_campaign($post_ID)
     {
         if (get_post_type($post_ID) != $this->token)
             return false;

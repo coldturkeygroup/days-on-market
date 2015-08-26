@@ -23,7 +23,11 @@ $photo = get_post_meta($id, 'photo', true);
 $name = get_post_meta($id, 'name', true);
 $valuator_link = get_post_meta($id, 'home_valuator', true);
 $phone = of_get_option('phone_number');
+$city_placeholder = of_get_option($id, 'city_placeholder', true);
 $show_sqft = get_post_meta($id, 'show_sqft', true);
+$modal_title = get_post_meta($id, 'modal_title', true);
+$modal_subtitle = get_post_meta($id, 'modal_subtitle', true);
+$modal_button = get_post_meta($id, 'modal_button', true);
 
 // Get the background image
 if (has_post_thumbnail($id))
@@ -52,6 +56,22 @@ if ($color_setting && $color_setting != '') {
 
 if ($hover_setting && $hover_setting != '') {
     $hover_color = $hover_setting;
+}
+
+if (!$city_placeholder || $city_placeholder == '') {
+    $city_placeholder = 'Chicago';
+}
+
+if (!$modal_title || $modal_title == '') {
+    $modal_title = 'Where should we send your results?';
+}
+
+if (!$modal_subtitle || $modal_subtitle == '') {
+    $modal_subtitle = 'How long will it take to sell a <span id="sq_ft-answer"></span> square foot <span id="type-answer"></span> (<span id="num_beds-answer"></span> bedrooms, <span id="num_baths-answer"></span> bathrooms) located in <span id="location-answer"></span>.';
+}
+
+if (!$modal_button || $modal_button == '') {
+    $modal_button = 'See My Results';
 }
 
 ?>
@@ -140,13 +160,13 @@ if ($hover_setting && $hover_setting != '') {
                     <?php if (isset($show_sqft) && $show_sqft == 'no') { ?>
                         <div class="form-group">
                             <label class="control-label" for="location">Location of Property (City)</label>
-                            <input type="text" class="form-control validate" id="location" name="location" placeholder="Chicago">
+                            <input type="text" class="form-control validate" id="location" name="location" placeholder="<?= $city_placeholder ?>">
                         </div>
                     <?php } else { ?>
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
                                 <label class="control-label" for="location">Location of Property (City)</label>
-                                <input type="text" class="form-control validate" id="location" name="location" placeholder="Chicago">
+                                <input type="text" class="form-control validate" id="location" name="location" placeholder="<?= $city_placeholder ?>">
                             </div>
                             <div class="col-xs-12 col-sm-6">
                                 <label class="control-label" for="sq_ft">How Many Square Feet Is Your Home?</label>
@@ -188,13 +208,9 @@ if ($hover_setting && $hover_setting != '') {
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <h1>Where should we send your results?</h1>
+                            <h1><?= $modal_title ?></h1>
 
-                            <p>How long will it take to sell a <span id="sq_ft-answer"></span> square foot
-                                <span id="type-answer"></span> (
-                                <span id="num_beds-answer"></span> bedrooms,
-                                <span id="num_baths-answer"></span> bathrooms) located in
-                                <span id="location-answer"></span>.</p>
+                            <p><?= $modal_subtitle ?></p>
 
                             <div class="form-group" style="margin-top:20px">
                                 <label for="first_name" class="control-label">First Name</label>
@@ -210,7 +226,7 @@ if ($hover_setting && $hover_setting != '') {
                             <?php wp_nonce_field('pf_days_on_market_submit_form', 'pf_days_on_market_nonce'); ?>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary btn-block" id="submit-results">See My Results</button>
+                            <button type="submit" class="btn btn-primary btn-block" id="submit-results"><?= $modal_button ?></button>
                         </div>
                     </div>
                 </div>
