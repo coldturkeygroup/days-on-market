@@ -3,7 +3,7 @@ Contributors: Aaron Huisinga
 Tags: real estate, platform, days on market
 Requires at least: 3.5
 Tested up to: 4.1
-Stable tag: 1.3
+Stable tag: 1.3.1
 
 A form for prospective home sellers to fill out to figure out how long it might take them to sell their home.
 
