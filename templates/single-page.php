@@ -224,6 +224,7 @@ if (!$modal_button || $modal_button == '') {
                             <input name="permalink" type="hidden" value="<?= $permalink; ?>">
                             <input name="action" type="hidden" id="pf_days_on_market_submit_form" value="pf_days_on_market_submit_form">
                             <?php wp_nonce_field('pf_days_on_market_submit_form', 'pf_days_on_market_nonce'); ?>
+                            <input name="page_id" type="hidden" value="<?= $id ?>">
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary btn-block" id="submit-results"><?= $modal_button ?></button>

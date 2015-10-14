@@ -575,6 +575,15 @@ class DaysOnMarket
                 'section' => 'info'
             ];
 
+            $field['email'] = [
+                'name' => __('Notification Email', $this->token),
+                'description' => __('This address will be emailed when a user opts-into your ad. If left empty, emails will be sent to the default address for your site.', $this->token),
+                'placeholder' => '',
+                'type' => 'text',
+                'default' => '',
+                'section' => 'info'
+            ];
+
             $fields['primary_color'] = [
                 'name' => __('Primary Color', $this->token),
                 'description' => __('Change the primary color of the funnel page.', $this->token),
@@ -693,15 +702,20 @@ class DaysOnMarket
      * Email the quiz results to the website admin
      *
      * @param $user_id
+     * @param $page_id
      */
-    protected function emailResultsToAdmin($user_id)
+    protected function emailResultsToAdmin($user_id, $page_id)
     {
         // Get the prospect data saved previously
         global $wpdb;
         $subscriber = $wpdb->get_row('SELECT * FROM ' . $this->table_name . ' WHERE id = \'' . $user_id . '\' ORDER BY id DESC LIMIT 0,1');
+        $email = get_bloginfo('admin_email');
+
+        if (get_post_meta($page_id, 'email', true) != null && filter_var(get_post_meta($page_id, 'email', true), FILTER_VALIDATE_EMAIL)) {
+            $email = get_post_meta($page_id, 'email', true);
+        }
 
         // Format the email and send it
-        $admin_email = get_bloginfo('admin_email');
         $headers[] = 'From: Platform <info@platform.marketing>';
         $headers[] = 'Reply-To: ' . $subscriber->email;
         $headers[] = 'Content-Type: text/html; charset=UTF-8';
@@ -712,7 +726,7 @@ class DaysOnMarket
         $message = ob_get_contents();
         ob_end_clean();
 
-        wp_mail($admin_email, $subject, $message, $headers);
+        wp_mail($email, $subject, $message, $headers);
     }
 
     /**
@@ -727,6 +741,7 @@ class DaysOnMarket
             global $wpdb;
             $sq_ft = 0;
             $blog_id = get_current_blog_id();
+            $page_id = sanitize_text_field($_POST['page_id']);
             $first_name = sanitize_text_field($_POST['first_name']);
             $email = sanitize_text_field($_POST['email']);
             $source = sanitize_text_field($_POST['permalink']);
@@ -793,7 +808,7 @@ class DaysOnMarket
             }
 
             // Email the blog owner the details for the new prospect
-            $this->emailResultsToAdmin($user_id);
+            $this->emailResultsToAdmin($user_id, $page_id);
 
             echo json_encode(['status' => 'success']);
             die();
