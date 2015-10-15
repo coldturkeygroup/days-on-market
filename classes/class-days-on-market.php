@@ -678,6 +678,9 @@ class DaysOnMarket
         if (get_post_type($post_ID) != $this->token)
             return false;
 
+        if (($_POST['post_status'] != 'publish') || ($_POST['original_post_status'] == 'publish'))
+            return false;
+
         global $wpdb;
         $title = get_the_title($post_ID);
         $permalink = get_permalink($post_ID);
