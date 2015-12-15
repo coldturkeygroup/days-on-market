@@ -69,24 +69,6 @@ jQuery('document').ready(function ($) {
 
         if (validated == 1) {
             $('#get-results-modal').modal('show');
-
-            var retargeting = $('#retargeting').val();
-            if (retargeting !== '') {
-                (function () {
-                    var _fbq = window._fbq || (window._fbq = []);
-                    if (!_fbq.loaded) {
-                        var fbds = document.createElement('script');
-                        fbds.async = true;
-                        fbds.src = '//connect.facebook.net/en_US/fbds.js';
-                        var s = document.getElementsByTagName('script')[0];
-                        s.parentNode.insertBefore(fbds, s);
-                        _fbq.loaded = true;
-                    }
-                    _fbq.push(['addPixelId', retargeting]);
-                })();
-                window._fbq = window._fbq || [];
-                window._fbq.push(['track', 'PixelInitialized', {}]);
-            }
         }
 
         return false;
@@ -113,22 +95,20 @@ jQuery('document').ready(function ($) {
                     $('#days-on-market,.modal-backdrop').remove();
                     $('.results').show();
 
-                    var conversion = $('#conversion').val();
+                    var retargeting = $('#retargeting').val(),
+                        conversion = $('#conversion').val();
+                    if (conversion != '') {
+                        if (conversion !== retargeting) {
+                            !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+                            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+                            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+                            document,'script','//connect.facebook.net/en_US/fbevents.js');
 
-                    if (conversion !== '') {
-                        (function () {
-                            var _fbq = window._fbq || (window._fbq = []);
-                            if (!_fbq.loaded) {
-                                var fbds = document.createElement('script');
-                                fbds.async = true;
-                                fbds.src = '//connect.facebook.net/en_US/fbds.js';
-                                var s = document.getElementsByTagName('script')[0];
-                                s.parentNode.insertBefore(fbds, s);
-                                _fbq.loaded = true;
-                            }
-                        })();
-                        window._fbq = window._fbq || [];
-                        window._fbq.push(['track', conversion, {'value': '0.00', 'currency': 'USD'}]);
+                            fbq('init', conversion);
+                        }
+
+                        fbq('track', "Lead");
                     }
                 }, 1000);
             }

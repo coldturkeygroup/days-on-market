@@ -606,8 +606,8 @@ class DaysOnMarket
         if ($meta_box == 'marketing' || $meta_box == 'all') {
             // Step before opt-in (after clicking button, before opt-in)
             $fields['retargeting'] = [
-                'name' => __('Retargeting (optional)', $this->token),
-                'description' => __('Facebook retargeting pixel to allow retargeting of people that view this page. (optional).', $this->token),
+                'name' => __('Facebook Pixel - Retargeting (optional)', $this->token),
+                'description' => __('Facebook Pixel to allow retargeting of people that view this page.', $this->token),
                 'placeholder' => __('Ex: 4123423454', $this->token),
                 'type' => 'text',
                 'default' => '',
@@ -616,8 +616,8 @@ class DaysOnMarket
 
             // After opt-in
             $fields['conversion'] = [
-                'name' => __('Conversion Tracking (optional)', $this->token),
-                'description' => __('Facebook conversion tracking pixel to help track performance of your ad (optional).', $this->token),
+                'name' => __('Facebook Pixel - Conversion (optional)', $this->token),
+                'description' => __('Facebook Pixel to allow conversion tracking of people that submit this page.', $this->token),
                 'placeholder' => __('Ex: 170432123454', $this->token),
                 'type' => 'text',
                 'default' => '',
