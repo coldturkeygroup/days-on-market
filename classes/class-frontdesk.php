@@ -48,7 +48,7 @@ class FrontDesk
     {
         try {
             if ($this->api_key != null || $this->api_key != '') {
-                $this->guzzle->post($this->api_base . 'campaigns/', [
+                $response = $this->guzzle->post($this->api_base . 'campaigns/', [
                     'body' => [
                         'key' => $this->api_key,
                         'title' => $title,
@@ -60,9 +60,32 @@ class FrontDesk
                 ]);
 
                 add_filter('redirect_post_location', [$this, 'add_success_var'], 99);
+
+                return $response->json()['data']['id'];
             }
         } catch (RequestException $e) {
             add_filter('redirect_post_location', [$this, 'add_error_var'], 99);
+        }
+    }
+
+    /**
+     * Update an existing FrontDesk campaign
+     * with a new title or permalink.
+     *
+     * @param $id
+     * @param $title
+     * @param $permalink
+     */
+    public function updateCampaign($id, $title, $permalink)
+    {
+        if ($this->api_key != null || $this->api_key != '') {
+            $this->guzzle->post($this->api_base . 'campaigns/' . $id, [
+                'body' => [
+                    'key' => $this->api_key,
+                    'title' => $title,
+                    'source' => $permalink
+                ]
+            ]);
         }
     }
 
@@ -81,7 +104,7 @@ class FrontDesk
                 $response = $this->guzzle->post($this->api_base . 'subscribers/', [
                     'body' => [
                         'key' => $this->api_key,
-                        'source' => $data['source'],
+                        'campaign_id' => $data['campaign_id'],
                         'email' => $data['email'],
                         'first_name' => $data['first_name']
                     ]

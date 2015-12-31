@@ -12,7 +12,7 @@ global $days_market, $wp_query;
 
 $id = get_the_ID();
 $title = get_the_title();
-$permalink = get_permalink();
+$frontdesk_campaign = get_post_meta( $id, 'frontdesk_campaign', true );
 $headline = get_post_meta($id, 'headline', true);
 $sub_headline = get_post_meta($id, 'subheadline', true);
 $broker = get_post_meta($id, 'legal_broker', true);
@@ -221,7 +221,7 @@ if (!$modal_button || $modal_button == '') {
                                 <input type="text" name="email" id="email" class="form-control" required="required" placeholder="Your Email Address">
                             </div>
 
-                            <input name="permalink" type="hidden" value="<?= $permalink; ?>">
+                            <input name="frontdesk_campaign" type="hidden" value="<?= $frontdesk_campaign ?>">
                             <input name="action" type="hidden" id="pf_days_on_market_submit_form" value="pf_days_on_market_submit_form">
                             <?php wp_nonce_field('pf_days_on_market_submit_form', 'pf_days_on_market_nonce'); ?>
                             <input name="page_id" type="hidden" value="<?= $id ?>">
