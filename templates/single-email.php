@@ -417,8 +417,8 @@
 					<?php if ( $subscriber->frontdesk_id != null ) { ?>
 						<tr>
 							<td align="center" valign="middle" class="emailButtonContent" style="color: #FFFFFF;font-family: 'Helvetica Neue',Arial,Helvetica,sans-serif;font-size: 16px;line-height: 1.6875;text-align: center;letter-spacing: 0.04em;padding: 10px 22px;-webkit-font-smoothing: antialiased;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-								<a href="https://tryfrontdesk.com/subscribers/' . $subscriber->frontdesk_id . '" target="_blank" style="color: #FFFFFF;text-decoration: none;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;">View
-									Prospect on FrontDesk</a>
+								<a href="https://platformcrm.com/subscribers/' . $subscriber->frontdesk_id . '" target="_blank" style="color: #FFFFFF;text-decoration: none;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;">View
+									Prospect on Platform CRM</a>
 							</td>
 						</tr>
 					<?php } ?>
@@ -447,13 +447,13 @@
 											<tr>
 												<td valign="top" class="utilityLink" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;line-height: 133%;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
                           <span class="notlook">
-                            <a href="https://tryfrontdesk.com/terms-of-service" target="_blank" style="color: #3A3A3A;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;">Terms
+                            <a href="https://platformcrm.com/terms-of-service" target="_blank" style="color: #3A3A3A;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;">Terms
 	                            of Service</a>
                           </span>
 												</td>
 												<td valign="top" class="utilityLink" style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;line-height: 133%;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
                           <span class="notlook">
-                            <a href="https://tryfrontdesk.com/privacy-policy" target="_blank" style="color: #3A3A3A;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;">Privacy
+                            <a href="https://platformcrm.com/privacy-policy" target="_blank" style="color: #3A3A3A;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;">Privacy
 	                            Policy</a>
                           </span>
 												</td>
