@@ -6,39 +6,56 @@ jQuery('document').ready(function ($) {
         $('.btn-primary').removeAttr('disabled');
     });
 
-    var delay = (function () {
-        var timer = 0;
-        return function (callback, ms) {
-            clearTimeout(timer);
-            timer = setTimeout(callback, ms);
-        };
-    })();
+    // Email Validation
+    if (DaysOnMarket.mailgun !== undefined && DaysOnMarket.mailgun !== '') {
+        $('#email').mailgun_validator({
+            api_key: DaysOnMarket.mailgun,
+            in_progress: function () {
+                $('#email').parent().removeClass('has-warning has-error');
+                $(".mailcheck-suggestion").remove();
+                $("[type=submit]").addClass("disabled").attr("disabled", "disabled");
+            },
+            success: function (data) {
+                $('#email').after(get_suggestion_str(data['is_valid'], data['did_you_mean']));
+            },
+            error: function () {
+                $("[type=submit]").removeClass("disabled").removeAttr("disabled");
+            }
+        });
+    }
+    // Parse Mailgun Responses
+    function get_suggestion_str(is_valid, alternate) {
+        if (is_valid) {
+            if (alternate) {
+                $('#email').parent().addClass('has-warning');
+                return '<div class="mailcheck-suggestion help-block">Did you mean <a href="#">' + alternate + '</a>?</div>';
+            }
+            if ($('#form-clicked').length) {
+                $('form').unbind().submit();
+                $("[type=submit]").addClass("disabled").attr("disabled", "disabled");
+            } else {
+                $("[type=submit]").removeClass("disabled").removeAttr("disabled");
+            }
 
-    // Mailcheck
-    $('#email').on('keyup', function () {
-        var input = $(this);
-        if (input.val().length < 10) {
-            return false;
+            return;
         }
+        $('#email').parent().addClass('has-error');
+        if (alternate) {
+            return '<div class="mailcheck-suggestion help-block">This email is invalid. Did you mean <a href="#">' + alternate + '</a>?</div>';
+        }
+        return '<div class="mailcheck-suggestion help-block">This email is invalid.</div>';
+    }
 
-        delay(function () {
-            input.mailcheck({
-                suggested: function (element, suggestion) {
-                    $('.mailcheck-suggestion').remove();
-                    $(element).after('<div class="mailcheck-suggestion" style="margin-top:5px;">Did you mean <a href="#">' + suggestion.full + '</a>?</div>');
-                },
-                empty: function () {
-                    $('.mailcheck-suggestion').remove();
-                }
-            });
-        }, 500);
-    });
-
-    $('.form-group').on('click', '.mailcheck-suggestion a', function (e) {
+    $(".form-group").on("click", ".mailcheck-suggestion a", function (e) {
         e.preventDefault();
-
-        $('#email').val($(this).text());
-        $('.mailcheck-suggestion').remove();
+        $("#email").val($(this).text());
+        $("[type=submit]").removeClass("disabled").removeAttr("disabled");
+        $(".mailcheck-suggestion").remove();
+    });
+    $('form').submit(function (e) {
+        e.preventDefault();
+        $(this).after('<input type="hidden" id="form-clicked" value="true">');
+        $('#email').trigger('focusout');
     });
 
     // Show results modal
@@ -99,11 +116,24 @@ jQuery('document').ready(function ($) {
                         conversion = $('#conversion').val();
                     if (conversion != '') {
                         if (conversion !== retargeting) {
-                            !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-                            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-                            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-                            document,'script','//connect.facebook.net/en_US/fbevents.js');
+                            !function (f, b, e, v, n, t, s) {
+                                if (f.fbq)return;
+                                n = f.fbq = function () {
+                                    n.callMethod ?
+                                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                                };
+                                if (!f._fbq)f._fbq = n;
+                                n.push = n;
+                                n.loaded = !0;
+                                n.version = '2.0';
+                                n.queue = [];
+                                t = b.createElement(e);
+                                t.async = !0;
+                                t.src = v;
+                                s = b.getElementsByTagName(e)[0];
+                                s.parentNode.insertBefore(t, s)
+                            }(window,
+                                document, 'script', '//connect.facebook.net/en_US/fbevents.js');
 
                             fbq('init', conversion);
                         }
