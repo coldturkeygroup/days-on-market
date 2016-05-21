@@ -116,12 +116,12 @@
 		}
 
 		.bodyContent a {
-			color: #16a085;
+			color: #29ace2;
 			text-decoration: none;
 		}
 
 		.bodyContent a:hover {
-			color: #16a085;
+			color: #29ace2;
 			text-decoration: underline !important;
 		}
 
@@ -343,7 +343,7 @@
 				<table border="0" cellpadding="0" cellspacing="0" id="emailLogo" style="width:600px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse ;">
 					<tr>
 						<td align="center" valign="top" style="padding-top: 40px;padding-right: 20px;padding-bottom: 30px;padding-left: 40px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-							<a href="http://platform.marketing/" target="_blank" title="Platform" style="text-decoration: none;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;"><img src="https://cdn.platform.marketing/assets/logo-dark.png" alt="Platform Logo" height="40" width="250" border="0" class="logoImage" style="border: 0;padding: 0;color: #459CE7 !important;font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif;font-size: 16px;font-weight: bold;height: auto !important;line-height: 100%;outline: none;text-align: center;text-decoration: none;display: block !important;-ms-interpolation-mode: bicubic;"></a>
+							<a href="http://platform.marketing/" target="_blank" title="Platform" style="text-decoration: none;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;"><img src="https://cdn.platformcrm.com/assets/logo/platform.png" alt="Platform Logo" height="64" width="250" border="0" class="logoImage" style="border: 0;padding: 0;color: #459CE7 !important;font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif;font-size: 16px;font-weight: bold;height: auto !important;line-height: 100%;outline: none;text-align: center;text-decoration: none;display: block !important;-ms-interpolation-mode: bicubic;"></a>
 						</td>
 					</tr>
 				</table>

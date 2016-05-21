@@ -51,8 +51,6 @@ class DaysOnMarket
             add_action('admin_menu', [$this, 'meta_box_setup'], 20);
             add_action('save_post', [$this, 'meta_box_save']);
             add_filter('post_updated_messages', [$this, 'updated_messages']);
-            add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_styles'], 10);
-            add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_scripts'], 10);
             add_filter('manage_edit-' . $this->token . '_columns', [
                 $this,
                 'register_custom_column_headings'
@@ -393,30 +391,6 @@ class DaysOnMarket
                 update_post_meta($post_id, $f, ${$f});
             }
         }
-    }
-
-    /**
-     * Register the stylesheets that will be
-     * used for our scripts in the dashboard.
-     *
-     */
-    public function enqueue_admin_styles()
-    {
-        wp_enqueue_style('wp-color-picker');
-    }
-
-    /**
-     * Register the Javascript files that will be
-     * used for our scripts in the dashboard.
-     */
-    public function enqueue_admin_scripts()
-    {
-        // Admin JS
-        wp_register_script($this->token . '-admin', esc_url($this->assets_url . 'js/admin.js'), [
-            'jquery',
-            'wp-color-picker'
-        ]);
-        wp_enqueue_script($this->token . '-admin');
     }
 
     /**
