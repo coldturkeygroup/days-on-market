@@ -1,4 +1,6 @@
-<?php namespace ColdTurkey\DaysOnMarket;
+<?php
+
+namespace ColdTurkey\DaysOnMarket;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly.
 
