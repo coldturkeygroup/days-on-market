@@ -2,7 +2,9 @@
 
 namespace ColdTurkey\DaysOnMarket;
 
-if (!defined('ABSPATH')) exit; // Exit if accessed directly.
+if (!defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly.
 
 // Composer autoloader
 require_once DAYS_MARKET_PLUGIN_PATH . 'vendor/autoload.php';
@@ -52,18 +54,18 @@ class FrontDesk
             if ($this->api_key != null || $this->api_key != '') {
                 $response = $this->guzzle->post($this->api_base . 'campaigns/', [
                     'form_params' => [
-                        'key' => $this->api_key,
-                        'title' => $title,
+                        'key'         => $this->api_key,
+                        'title'       => $title,
                         'description' => 'Campaign for Platform Days on Market Funnel',
-                        'type' => 'Platform',
-                        'total_cost' => '10000',
-                        'source' => $permalink
+                        'type'        => 'Platform',
+                        'total_cost'  => '10000',
+                        'source'      => $permalink
                     ]
                 ]);
 
                 add_filter('redirect_post_location', [$this, 'add_success_var'], 99);
 
-                return $response->json()['data']['id'];
+                return json_decode($response->getBody(), true)['data']['id'];
             }
         } catch (RequestException $e) {
             add_filter('redirect_post_location', [$this, 'add_error_var'], 99);
@@ -83,8 +85,8 @@ class FrontDesk
         if ($this->api_key != null || $this->api_key != '') {
             $this->guzzle->post($this->api_base . 'campaigns/' . $id, [
                 'form_params' => [
-                    'key' => $this->api_key,
-                    'title' => $title,
+                    'key'    => $this->api_key,
+                    'title'  => $title,
                     'source' => $permalink
                 ]
             ]);
@@ -105,14 +107,14 @@ class FrontDesk
             if ($this->api_key != null || $this->api_key != '') {
                 $response = $this->guzzle->post($this->api_base . 'subscribers/', [
                     'form_params' => [
-                        'key' => $this->api_key,
+                        'key'         => $this->api_key,
                         'campaign_id' => $data['campaign_id'],
-                        'email' => $data['email'],
-                        'first_name' => $data['first_name']
+                        'email'       => $data['email'],
+                        'first_name'  => $data['first_name']
                     ]
                 ]);
 
-                return $response->json()['data']['id'];
+                return json_decode($response->getBody(), true)['data']['id'];
             }
 
             return null;
@@ -136,20 +138,20 @@ class FrontDesk
             if ($this->api_key != null || $this->api_key != '') {
                 $response = $this->guzzle->post($this->api_base . 'subscribers/update/', [
                     'form_params' => [
-                        'key' => $this->api_key,
-                        'id' => $id,
-                        'email' => $data['email'],
+                        'key'       => $this->api_key,
+                        'id'        => $id,
+                        'email'     => $data['email'],
                         'last_name' => $data['last_name'],
-                        'address' => $data['address'],
+                        'address'   => $data['address'],
                         'address_2' => $data['address_2'],
-                        'city' => $data['city'],
-                        'state' => $data['state'],
-                        'zip_code' => $data['zip_code'],
-                        'phone' => $data['phone']
+                        'city'      => $data['city'],
+                        'state'     => $data['state'],
+                        'zip_code'  => $data['zip_code'],
+                        'phone'     => $data['phone']
                     ]
                 ]);
 
-                return $response->json()['data']['id'];
+                return json_decode($response->getBody(), true)['data']['id'];
             }
 
             return null;
@@ -173,14 +175,14 @@ class FrontDesk
             if ($this->api_key != null || $this->api_key != '') {
                 $response = $this->guzzle->post($this->api_base . 'subscribers/note/', [
                     'form_params' => [
-                        'key' => $this->api_key,
+                        'key'           => $this->api_key,
                         'subscriber_id' => $id,
-                        'title' => $title,
-                        'content' => $content
+                        'title'         => $title,
+                        'content'       => $content
                     ]
                 ]);
 
-                return $response->json()['data']['id'];
+                return json_decode($response->getBody(), true)['data']['id'];
             }
 
             return null;
@@ -227,11 +229,13 @@ class FrontDesk
      */
     public function adminNotices()
     {
-        if (isset($_GET[$this->token . '_frontdesk_error']))
+        if (isset($_GET[$this->token . '_frontdesk_error'])) {
             echo '<div class="error"><p>A Campaign with this URL already exists. No new Platform CRM Campaign has been created.</p></div>';
+        }
 
-        if (isset($_GET[$this->token . '_frontdesk_success']))
+        if (isset($_GET[$this->token . '_frontdesk_success'])) {
             echo '<div class="updated"><p>A Campaign for this House Hunter has been successfully setup on Platform CRM!</p></div>';
+        }
     }
 
 }
