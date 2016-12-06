@@ -51,7 +51,7 @@ class FrontDesk
         try {
             if ($this->api_key != null || $this->api_key != '') {
                 $response = $this->guzzle->post($this->api_base . 'campaigns/', [
-                    'body' => [
+                    'form_params' => [
                         'key' => $this->api_key,
                         'title' => $title,
                         'description' => 'Campaign for Platform Days on Market Funnel',
@@ -82,7 +82,7 @@ class FrontDesk
     {
         if ($this->api_key != null || $this->api_key != '') {
             $this->guzzle->post($this->api_base . 'campaigns/' . $id, [
-                'body' => [
+                'form_params' => [
                     'key' => $this->api_key,
                     'title' => $title,
                     'source' => $permalink
@@ -104,7 +104,7 @@ class FrontDesk
         try {
             if ($this->api_key != null || $this->api_key != '') {
                 $response = $this->guzzle->post($this->api_base . 'subscribers/', [
-                    'body' => [
+                    'form_params' => [
                         'key' => $this->api_key,
                         'campaign_id' => $data['campaign_id'],
                         'email' => $data['email'],
@@ -135,7 +135,7 @@ class FrontDesk
         try {
             if ($this->api_key != null || $this->api_key != '') {
                 $response = $this->guzzle->post($this->api_base . 'subscribers/update/', [
-                    'body' => [
+                    'form_params' => [
                         'key' => $this->api_key,
                         'id' => $id,
                         'email' => $data['email'],
@@ -172,7 +172,7 @@ class FrontDesk
         try {
             if ($this->api_key != null || $this->api_key != '') {
                 $response = $this->guzzle->post($this->api_base . 'subscribers/note/', [
-                    'body' => [
+                    'form_params' => [
                         'key' => $this->api_key,
                         'subscriber_id' => $id,
                         'title' => $title,
