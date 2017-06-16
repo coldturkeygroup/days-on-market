@@ -668,7 +668,7 @@ class DaysOnMarket
             $domain = $wpdb->get_var("SELECT option_value FROM {$options_table} WHERE option_name = 'siteurl' LIMIT 1");
 
             if ($mapped)
-                $permalink = str_replace($domain, 'http://' . $mapped, $permalink);
+                $permalink = str_replace($domain, 'https://' . $mapped, $permalink);
         }
 
         if (($_POST['post_status'] != 'publish') || ($_POST['original_post_status'] == 'publish')) {
