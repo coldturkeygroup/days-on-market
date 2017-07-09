@@ -7,9 +7,9 @@ jQuery('document').ready(function ($) {
     });
 
     // Email Validation
-    if (DaysOnMarket.mailgun !== undefined && DaysOnMarket.mailgun !== '') {
-        $('#email').mailgun_validator({
-            api_key: DaysOnMarket.mailgun,
+    if (DaysOnMarket.platformvalidator !== undefined && DaysOnMarket.platformvalidator !== '') {
+        $('#email').platform_email_validator({
+            api_key: DaysOnMarket.platformvalidator,
             in_progress: function () {
                 $('#email').parent().removeClass('has-warning has-error');
                 $(".mailcheck-suggestion").remove();
@@ -23,6 +23,7 @@ jQuery('document').ready(function ($) {
             }
         });
     }
+
     // Parse Mailgun Responses
     function get_suggestion_str(is_valid, alternate) {
         if (is_valid) {
@@ -48,7 +49,7 @@ jQuery('document').ready(function ($) {
 
     $(".form-group").on("click", ".mailcheck-suggestion a", function (e) {
         e.preventDefault();
-        $("#email").val($(this).text());
+        $("#email").val($(this).text()).parent().removeClass('has-warning has-error');
         $("[type=submit]").removeClass("disabled").removeAttr("disabled");
         $(".mailcheck-suggestion").remove();
     });
@@ -117,12 +118,12 @@ jQuery('document').ready(function ($) {
                     if (conversion != '') {
                         if (conversion !== retargeting) {
                             !function (f, b, e, v, n, t, s) {
-                                if (f.fbq)return;
+                                if (f.fbq) return;
                                 n = f.fbq = function () {
                                     n.callMethod ?
                                         n.callMethod.apply(n, arguments) : n.queue.push(arguments)
                                 };
-                                if (!f._fbq)f._fbq = n;
+                                if (!f._fbq) f._fbq = n;
                                 n.push = n;
                                 n.loaded = !0;
                                 n.version = '2.0';

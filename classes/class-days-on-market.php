@@ -2,7 +2,9 @@
 
 namespace ColdTurkey\DaysOnMarket;
 
-if (!defined('ABSPATH')) exit; // Exit if accessed directly.
+if (!defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly.
 
 // Composer autoloader
 require_once DAYS_MARKET_PLUGIN_PATH . 'vendor/autoload.php';
@@ -87,41 +89,42 @@ class DaysOnMarket
     public function register_post_type()
     {
         $labels = [
-            'name' => _x('Days On Market', 'post type general name', $this->token),
-            'singular_name' => _x('Days On Market', 'post type singular name', $this->token),
-            'add_new' => _x('Add New', $this->token, $this->token),
-            'add_new_item' => sprintf(__('Add New %s', $this->token), __('Days On Market', $this->token)),
-            'edit_item' => sprintf(__('Edit %s', $this->token), __('Days On Market', $this->token)),
-            'new_item' => sprintf(__('New %s', $this->token), __('Days On Market', $this->token)),
-            'all_items' => sprintf(__('All %s', $this->token), __('Days On Market', $this->token)),
-            'view_item' => sprintf(__('View %s', $this->token), __('Days On Market', $this->token)),
-            'search_items' => sprintf(__('Search %a', $this->token), __('Days On Market', $this->token)),
-            'not_found' => sprintf(__('No %s Found', $this->token), __('Days On Market', $this->token)),
+            'name'               => _x('Days On Market', 'post type general name', $this->token),
+            'singular_name'      => _x('Days On Market', 'post type singular name', $this->token),
+            'add_new'            => _x('Add New', $this->token, $this->token),
+            'add_new_item'       => sprintf(__('Add New %s', $this->token), __('Days On Market', $this->token)),
+            'edit_item'          => sprintf(__('Edit %s', $this->token), __('Days On Market', $this->token)),
+            'new_item'           => sprintf(__('New %s', $this->token), __('Days On Market', $this->token)),
+            'all_items'          => sprintf(__('All %s', $this->token), __('Days On Market', $this->token)),
+            'view_item'          => sprintf(__('View %s', $this->token), __('Days On Market', $this->token)),
+            'search_items'       => sprintf(__('Search %a', $this->token), __('Days On Market', $this->token)),
+            'not_found'          => sprintf(__('No %s Found', $this->token), __('Days On Market', $this->token)),
             'not_found_in_trash' => sprintf(__('No %s Found In Trash', $this->token), __('Days On Market', $this->token)),
-            'parent_item_colon' => '',
-            'menu_name' => __('Days On Market', $this->token)
+            'parent_item_colon'  => '',
+            'menu_name'          => __('Days On Market', $this->token)
         ];
 
         $slug = __('days-on-market', $this->token);
         $custom_slug = get_option($this->token . '_slug');
-        if ($custom_slug && strlen($custom_slug) > 0 && $custom_slug != '')
+        if ($custom_slug && strlen($custom_slug) > 0 && $custom_slug != '') {
             $slug = $custom_slug;
+        }
 
         $args = [
-            'labels' => $labels,
-            'public' => true,
-            'publicly_queryable' => true,
+            'labels'              => $labels,
+            'public'              => true,
+            'publicly_queryable'  => true,
             'exclude_from_search' => true,
-            'show_ui' => true,
-            'show_in_menu' => true,
-            'query_var' => true,
-            'rewrite' => ['slug' => $slug],
-            'capability_type' => 'post',
-            'has_archive' => false,
-            'hierarchical' => false,
-            'supports' => ['title', 'thumbnail'],
-            'menu_position' => 5,
-            'menu_icon' => 'dashicons-admin-calendar'
+            'show_ui'             => true,
+            'show_in_menu'        => true,
+            'query_var'           => true,
+            'rewrite'             => ['slug' => $slug],
+            'capability_type'     => 'post',
+            'has_archive'         => false,
+            'hierarchical'        => false,
+            'supports'            => ['title', 'thumbnail'],
+            'menu_position'       => 5,
+            'menu_icon'           => 'dashicons-admin-calendar'
         ];
 
         register_post_type($this->token, $args);
@@ -215,15 +218,15 @@ class DaysOnMarket
         global $post, $post_ID;
 
         $messages[$this->token] = [
-            0 => '', // Unused. Messages start at index 1.
-            1 => sprintf(__('Page updated. %sView page%s.', $this->token), '<a href="' . esc_url(get_permalink($post_ID)) . '">', '</a>'),
-            4 => __('Days on Market funnel updated.', $this->token),
+            0  => '', // Unused. Messages start at index 1.
+            1  => sprintf(__('Page updated. %sView page%s.', $this->token), '<a href="' . esc_url(get_permalink($post_ID)) . '">', '</a>'),
+            4  => __('Days on Market funnel updated.', $this->token),
             /* translators: %s: date and time of the revision */
-            5 => isset($_GET['revision']) ? sprintf(__('Days on Market funnel restored to revision from %s.', $this->token), wp_post_revision_title((int)$_GET['revision'], false)) : false,
-            6 => sprintf(__('Days on Market funnel published. %sView Funnel%s.', $this->token), '<a href="' . esc_url(get_permalink($post_ID)) . '">', '</a>'),
-            7 => __('Days on Market funnel saved.', $this->token),
-            8 => sprintf(__('Days on Market funnel submitted. %sPreview Funnel%s.', $this->token), '<a target="_blank" href="' . esc_url(add_query_arg('preview', 'true', get_permalink($post_ID))) . '">', '</a>'),
-            9 => sprintf(__('Days on Market funnel scheduled for: %1$s. %2$sPreview Funnel%3$s.', $this->token), '<strong>' . date_i18n(__('M j, Y @ G:i', $this->token), strtotime($post->post_date)) . '</strong>', '<a target="_blank" href="' . esc_url(get_permalink($post_ID)) . '">', '</a>'),
+            5  => isset($_GET['revision']) ? sprintf(__('Days on Market funnel restored to revision from %s.', $this->token), wp_post_revision_title((int) $_GET['revision'], false)) : false,
+            6  => sprintf(__('Days on Market funnel published. %sView Funnel%s.', $this->token), '<a href="' . esc_url(get_permalink($post_ID)) . '">', '</a>'),
+            7  => __('Days on Market funnel saved.', $this->token),
+            8  => sprintf(__('Days on Market funnel submitted. %sPreview Funnel%s.', $this->token), '<a target="_blank" href="' . esc_url(add_query_arg('preview', 'true', get_permalink($post_ID))) . '">', '</a>'),
+            9  => sprintf(__('Days on Market funnel scheduled for: %1$s. %2$sPreview Funnel%3$s.', $this->token), '<strong>' . date_i18n(__('M j, Y @ G:i', $this->token), strtotime($post->post_date)) . '</strong>', '<a target="_blank" href="' . esc_url(get_permalink($post_ID)) . '">', '</a>'),
             10 => sprintf(__('Days on Market funnel draft updated. %sPreview Funnel%s.', $this->token), '<a target="_blank" href="' . esc_url(add_query_arg('preview', 'true', get_permalink($post_ID))) . '">', '</a>'),
         ];
 
@@ -265,8 +268,9 @@ class DaysOnMarket
 
         $html = '';
 
-        if ($meta['args']['type'] == 'basic')
+        if ($meta['args']['type'] == 'basic') {
             $html .= '<input type="hidden" name="' . $this->token . '_nonce" id="' . $this->token . '_nonce" value="' . wp_create_nonce(plugin_basename($this->dir)) . '">';
+        }
 
         if (0 < count($field_data)) {
             $html .= '<table class="form-table">' . "\n";
@@ -278,8 +282,9 @@ class DaysOnMarket
                 $data = $v['default'];
                 $placeholder = $v['placeholder'];
                 $type = $v['type'];
-                if (isset($fields[$k]) && isset($fields[$k][0]))
+                if (isset($fields[$k]) && isset($fields[$k][0])) {
                     $data = $fields[$k][0];
+                }
 
                 if ($type == 'text') {
                     $html .= '<tr valign="top"><th scope="row"><label for="' . esc_attr($k) . '">' . $v['name'] . '</label></th><td>';
@@ -295,15 +300,16 @@ class DaysOnMarket
                     global $post;
                     $args = [
                         'posts_per_page' => 20,
-                        'post_type' => $v['default'],
-                        'post_status' => 'publish'
+                        'post_type'      => $v['default'],
+                        'post_status'    => 'publish'
                     ];
                     $custom_posts = get_posts($args);
                     foreach ($custom_posts as $post) : setup_postdata($post);
                         $link = str_replace(home_url(), '', get_permalink());
                         $selected = '';
-                        if ($link == $data)
+                        if ($link == $data) {
                             $selected = 'selected';
+                        }
 
                         $html .= '<option value="' . $link . '" ' . $selected . '>' . get_the_title() . '</option>';
                     endforeach;
@@ -316,8 +322,9 @@ class DaysOnMarket
                     $html .= '<select style="width:100%" name="' . esc_attr($k) . '" id="' . esc_attr($k) . '">';
                     foreach ($v['options'] as $option) {
                         $selected = '';
-                        if ($option == $data)
+                        if ($option == $data) {
                             $selected = 'selected';
+                        }
 
                         $html .= '<option value="' . $option . '" ' . $selected . '>' . ucfirst($option) . '</option>';
                     }
@@ -364,15 +371,18 @@ class DaysOnMarket
     public function meta_box_save($post_id)
     {
         // Verify
-        if ((get_post_type() != $this->token) || !wp_verify_nonce($_POST[$this->token . '_nonce'], plugin_basename($this->dir)))
+        if ((get_post_type() != $this->token) || !wp_verify_nonce($_POST[$this->token . '_nonce'], plugin_basename($this->dir))) {
             return $post_id;
+        }
 
         if ('page' == $_POST['post_type']) {
-            if (!current_user_can('edit_page', $post_id))
+            if (!current_user_can('edit_page', $post_id)) {
                 return $post_id;
+            }
         } else {
-            if (!current_user_can('edit_post', $post_id))
+            if (!current_user_can('edit_post', $post_id)) {
                 return $post_id;
+            }
         }
 
         $field_data = $this->get_custom_fields_settings('all');
@@ -380,12 +390,14 @@ class DaysOnMarket
 
         foreach ($fields as $f) {
 
-            if (isset($_POST[$f]))
+            if (isset($_POST[$f])) {
                 ${$f} = strip_tags(trim($_POST[$f]));
+            }
 
             // Escape the URLs.
-            if ('url' == $field_data[$f]['type'])
+            if ('url' == $field_data[$f]['type']) {
                 ${$f} = esc_url(${$f});
+            }
 
             if (${$f} == '') {
                 delete_post_meta($post_id, $f, get_post_meta($post_id, $f, true));
@@ -415,14 +427,14 @@ class DaysOnMarket
                 'jquery'
             ], DAYS_MARKET_PLUGIN_VERSION);
             wp_enqueue_script($this->token . '-js');
-            wp_register_script('mailgun-validator', esc_url($this->assets_url . 'js/mailgun-validator.js'), [
+            wp_register_script('platform-email-validator', esc_url($this->assets_url . 'js/platform-email-validator.js'), [
                 'jquery'
             ], DAYS_MARKET_PLUGIN_VERSION);
-            wp_enqueue_script('mailgun-validator');
+            wp_enqueue_script('platform-email-validator');
 
             $localize = [
-                'ajaxurl' => admin_url('admin-ajax.php'),
-                'mailgun' => defined('MAILGUN_PUBLIC') ? MAILGUN_PUBLIC : ''
+                'ajaxurl'           => admin_url('admin-ajax.php'),
+                'platformvalidator' => defined('MAILGUN_PUBLIC') ? MAILGUN_PUBLIC : ''
             ];
             wp_localize_script($this->token . '-js', 'DaysOnMarket', $localize);
         }
@@ -444,161 +456,161 @@ class DaysOnMarket
 
         if ($meta_box == 'basic' || $meta_box == 'all') {
             $fields['headline'] = [
-                'name' => __('Headline', $this->token),
+                'name'        => __('Headline', $this->token),
                 'description' => __('The headline for your page.', $this->token),
                 'placeholder' => __('Listing Calculator', $this->token),
-                'type' => 'text',
-                'default' => 'Listing Calculator',
-                'section' => 'info'
+                'type'        => 'text',
+                'default'     => 'Listing Calculator',
+                'section'     => 'info'
             ];
 
             $fields['subheadline'] = [
-                'name' => __('Sub-Headline', $this->token),
+                'name'        => __('Sub-Headline', $this->token),
                 'description' => __('The sub-headline for your page.', $this->token),
                 'placeholder' => __('How long will it take to sell my home?', $this->token),
-                'type' => 'text',
-                'default' => 'How long will it take to sell my home?',
-                'section' => 'info'
+                'type'        => 'text',
+                'default'     => 'How long will it take to sell my home?',
+                'section'     => 'info'
             ];
 
             $fields['call_to_action'] = [
-                'name' => __('Your Call To Action', $this->token),
+                'name'        => __('Your Call To Action', $this->token),
                 'description' => __('The call to action for users to give you their contact information.', $this->token),
                 'placeholder' => __('Get My Results!', $this->token),
-                'type' => 'text',
-                'default' => 'Get My Results!',
-                'section' => 'info'
+                'type'        => 'text',
+                'default'     => 'Get My Results!',
+                'section'     => 'info'
             ];
 
             $fields['modal_title'] = [
-                'name' => __('Modal Title', $this->token),
+                'name'        => __('Modal Title', $this->token),
                 'description' => __('The title for the modal shown after CTA button is clicked.', $this->token),
                 'placeholder' => __('Get My Results!', $this->token),
-                'type' => 'text',
-                'default' => 'Where should we send your results?',
-                'section' => 'info'
+                'type'        => 'text',
+                'default'     => 'Where should we send your results?',
+                'section'     => 'info'
             ];
 
             $fields['modal_subtitle'] = [
-                'name' => __('Modal Subtitle', $this->token),
+                'name'        => __('Modal Subtitle', $this->token),
                 'description' => __('The subtitle for the modal shown after CTA button is clicked.', $this->token),
                 'placeholder' => '',
-                'type' => 'text',
-                'default' => 'How long will it take to sell a <span id="sq_ft-answer"></span> square foot <span id="type-answer"></span> (<span id="num_beds-answer"></span> bedrooms, <span id="num_baths-answer"></span> bathrooms) located in <span id="location-answer"></span>.',
-                'section' => 'info'
+                'type'        => 'text',
+                'default'     => 'How long will it take to sell a <span id="sq_ft-answer"></span> square foot <span id="type-answer"></span> (<span id="num_beds-answer"></span> bedrooms, <span id="num_baths-answer"></span> bathrooms) located in <span id="location-answer"></span>.',
+                'section'     => 'info'
             ];
 
             $fields['modal_button'] = [
-                'name' => __('Modal Button', $this->token),
+                'name'        => __('Modal Button', $this->token),
                 'description' => __('The submit button text for the modal shown after CTA button is clicked.', $this->token),
                 'placeholder' => __('See My Results', $this->token),
-                'type' => 'text',
-                'default' => 'See My Results',
-                'section' => 'info'
+                'type'        => 'text',
+                'default'     => 'See My Results',
+                'section'     => 'info'
             ];
 
             $fields['show_sqft'] = [
-                'name' => __('Show Square Footage Field', $this->token),
+                'name'        => __('Show Square Footage Field', $this->token),
                 'description' => __('If set to no, the square footage field will not be shown', $this->token),
                 'placeholder' => '',
-                'type' => 'select',
-                'default' => 'yes',
-                'options' => ['no', 'yes'],
-                'section' => 'info'
+                'type'        => 'select',
+                'default'     => 'yes',
+                'options'     => ['no', 'yes'],
+                'section'     => 'info'
             ];
 
             $fields['city_placeholder'] = [
-                'name' => __('City Input Placeholder', $this->token),
+                'name'        => __('City Input Placeholder', $this->token),
                 'description' => __('The placeholder to be shown in the City field before a user enters any text.', $this->token),
                 'placeholder' => __('Chicago', $this->token),
-                'type' => 'text',
-                'default' => 'Chicago',
-                'section' => 'info'
+                'type'        => 'text',
+                'default'     => 'Chicago',
+                'section'     => 'info'
             ];
 
             $fields['home_valuator'] = [
-                'name' => __('Link To Home Valuator', $this->token),
+                'name'        => __('Link To Home Valuator', $this->token),
                 'description' => __('The last step of the funnel allows you to link the user to your Home Valuator. Enter the link for the funnel here.', $this->token),
                 'placeholder' => '',
-                'type' => 'posts',
-                'default' => 'pf_valuator',
-                'section' => 'info'
+                'type'        => 'posts',
+                'default'     => 'pf_valuator',
+                'section'     => 'info'
             ];
 
             $fields['legal_broker'] = [
-                'name' => __('Your Legal Broker', $this->token),
+                'name'        => __('Your Legal Broker', $this->token),
                 'description' => __('This will be displayed on the bottom of the page.', $this->token),
                 'placeholder' => '',
-                'type' => 'text',
-                'default' => '',
-                'section' => 'info'
+                'type'        => 'text',
+                'default'     => '',
+                'section'     => 'info'
             ];
 
             $fields['name'] = [
-                'name' => __('Your Name', $this->token),
+                'name'        => __('Your Name', $this->token),
                 'description' => __('Your name for introducing you at the end of the funnel..', $this->token),
                 'placeholder' => '',
-                'type' => 'text',
-                'default' => '',
-                'section' => 'info'
+                'type'        => 'text',
+                'default'     => '',
+                'section'     => 'info'
             ];
 
             $fields['photo'] = [
-                'name' => __('Your Photo', $this->token),
+                'name'        => __('Your Photo', $this->token),
                 'description' => __('A photo of you for the thank you page of the funnel.', $this->token),
                 'placeholder' => '',
-                'type' => 'url',
-                'default' => '',
-                'section' => 'info'
+                'type'        => 'url',
+                'default'     => '',
+                'section'     => 'info'
             ];
 
             $fields['email'] = [
-                'name' => __('Notification Email', $this->token),
+                'name'        => __('Notification Email', $this->token),
                 'description' => __('This address will be emailed when a user opts-into your ad. If left empty, emails will be sent to the default address for your site.', $this->token),
                 'placeholder' => '',
-                'type' => 'text',
-                'default' => '',
-                'section' => 'info'
+                'type'        => 'text',
+                'default'     => '',
+                'section'     => 'info'
             ];
 
             $fields['primary_color'] = [
-                'name' => __('Primary Color', $this->token),
+                'name'        => __('Primary Color', $this->token),
                 'description' => __('Change the primary color of the funnel page.', $this->token),
                 'placeholder' => '',
-                'type' => 'color',
-                'default' => '',
-                'section' => 'info'
+                'type'        => 'color',
+                'default'     => '',
+                'section'     => 'info'
             ];
 
             $fields['hover_color'] = [
-                'name' => __('Hover Color', $this->token),
+                'name'        => __('Hover Color', $this->token),
                 'description' => __('Change the button hover color of the funnel page.', $this->token),
                 'placeholder' => '',
-                'type' => 'color',
-                'default' => '',
-                'section' => 'info'
+                'type'        => 'color',
+                'default'     => '',
+                'section'     => 'info'
             ];
         }
 
         if ($meta_box == 'marketing' || $meta_box == 'all') {
             // Step before opt-in (after clicking button, before opt-in)
             $fields['retargeting'] = [
-                'name' => __('Facebook Pixel - Retargeting (optional)', $this->token),
+                'name'        => __('Facebook Pixel - Retargeting (optional)', $this->token),
                 'description' => __('Facebook Pixel to allow retargeting of people that view this page.', $this->token),
                 'placeholder' => __('Ex: 4123423454', $this->token),
-                'type' => 'text',
-                'default' => '',
-                'section' => 'info'
+                'type'        => 'text',
+                'default'     => '',
+                'section'     => 'info'
             ];
 
             // After opt-in
             $fields['conversion'] = [
-                'name' => __('Facebook Pixel - Conversion (optional)', $this->token),
+                'name'        => __('Facebook Pixel - Conversion (optional)', $this->token),
                 'description' => __('Facebook Pixel to allow conversion tracking of people that submit this page.', $this->token),
                 'placeholder' => __('Ex: 170432123454', $this->token),
-                'type' => 'text',
-                'default' => '',
-                'section' => 'info'
+                'type'        => 'text',
+                'default'     => '',
+                'section'     => 'info'
             ];
         }
 
@@ -614,8 +626,9 @@ class DaysOnMarket
     {
         // Single house hunter page template
         if (is_single() && get_post_type() == $this->token) {
-            if (!defined('PLATFORM_FUNNEL'))
+            if (!defined('PLATFORM_FUNNEL')) {
                 define('PLATFORM_FUNNEL', 'DAYS_MARKET');
+            }
 
             include($this->template_path . 'single-page.php');
             exit;
@@ -635,8 +648,9 @@ class DaysOnMarket
         if ($pageID) {
             $file = get_post_meta($pageID, 'media_file', true);
 
-            if (preg_match('/(\.jpg|\.png|\.bmp|\.gif)$/', $file))
+            if (preg_match('/(\.jpg|\.png|\.bmp|\.gif)$/', $file)) {
                 return '<img src="' . $file . '" style="margin-left:auto;margin-right:auto;margin-bottom:0px;display:block;" class="img-responsive img-thumbnail">';
+            }
         }
 
         return false;
@@ -652,8 +666,9 @@ class DaysOnMarket
      */
     public function create_frontdesk_campaign($post_ID)
     {
-        if (get_post_type($post_ID) != $this->token)
+        if (get_post_type($post_ID) != $this->token) {
             return false;
+        }
 
         global $wpdb;
         $permalink = get_permalink($post_ID);
@@ -667,8 +682,9 @@ class DaysOnMarket
             $mapped = $wpdb->get_var("SELECT domain FROM {$wpdb->dmtable} WHERE blog_id = '{$blog_id}' ORDER BY CHAR_LENGTH(domain) DESC LIMIT 1");
             $domain = $wpdb->get_var("SELECT option_value FROM {$options_table} WHERE option_name = 'siteurl' LIMIT 1");
 
-            if ($mapped)
+            if ($mapped) {
                 $permalink = str_replace($domain, 'https://' . $mapped, $permalink);
+            }
         }
 
         if (($_POST['post_status'] != 'publish') || ($_POST['original_post_status'] == 'publish')) {
@@ -768,8 +784,8 @@ class DaysOnMarket
             // Create the prospect on FrontDesk
             $frontdesk_id = $this->frontdesk->createProspect([
                 'campaign_id' => $frontdesk_campaign,
-                'first_name' => $first_name,
-                'email' => $email
+                'first_name'  => $first_name,
+                'email'       => $email
             ]);
 
             if ($frontdesk_id != null) {
