@@ -26,7 +26,7 @@ class FrontDesk
      *
      * @param int $api_version
      */
-    public function __construct($api_version = 1)
+    public function __construct($api_version = 2)
     {
         $this->token = 'pf_days_on_market';
         $this->api_key = get_option('pf_seller_quiz_frontdesk_key');
@@ -83,7 +83,7 @@ class FrontDesk
     public function updateCampaign($id, $title, $permalink)
     {
         if ($this->api_key != null || $this->api_key != '') {
-            $this->guzzle->post($this->api_base . 'campaigns/' . $id, [
+            $this->guzzle->patch($this->api_base . 'campaigns/' . $id, [
                 'form_params' => [
                     'key'    => $this->api_key,
                     'title'  => $title,
@@ -105,10 +105,10 @@ class FrontDesk
     {
         try {
             if ($this->api_key != null || $this->api_key != '') {
-                $response = $this->guzzle->post($this->api_base . 'subscribers/', [
+                $response = $this->guzzle->post($this->api_base . 'subscribers/complete/', [
                     'form_params' => [
                         'key'         => $this->api_key,
-                        'campaign_id' => $data['campaign_id'],
+                        'campaigns'   => $data['campaign_id'],
                         'email'       => $data['email'],
                         'first_name'  => $data['first_name']
                     ]
@@ -136,10 +136,9 @@ class FrontDesk
     {
         try {
             if ($this->api_key != null || $this->api_key != '') {
-                $response = $this->guzzle->post($this->api_base . 'subscribers/update/', [
+                $response = $this->guzzle->patch($this->api_base . 'subscribers/' . $id, [
                     'form_params' => [
                         'key'       => $this->api_key,
-                        'id'        => $id,
                         'email'     => $data['email'],
                         'last_name' => $data['last_name'],
                         'address'   => $data['address'],
@@ -173,7 +172,7 @@ class FrontDesk
     {
         try {
             if ($this->api_key != null || $this->api_key != '') {
-                $response = $this->guzzle->post($this->api_base . 'subscribers/note/', [
+                $response = $this->guzzle->post($this->api_base . 'subscribers/notes/', [
                     'form_params' => [
                         'key'           => $this->api_key,
                         'subscriber_id' => $id,
