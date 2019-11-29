@@ -4,7 +4,7 @@ namespace ColdTurkey\DaysOnMarket;
 
 /*
  * Plugin Name: Days On Market
- * Version: 1.7.9
+ * Version: 1.7.10
  * Plugin URI: http://www.coldturkeygroup.com/
  * Description: A form for prospective home sellers to fill out to figure out how long it might take them to sell their home.
  * Author: Cold Turkey Group
@@ -26,7 +26,7 @@ if (!defined('DAYS_MARKET_PLUGIN_PATH')) {
 }
 
 if (!defined('DAYS_MARKET_PLUGIN_VERSION')) {
-    define('DAYS_MARKET_PLUGIN_VERSION', '1.7.9');
+    define('DAYS_MARKET_PLUGIN_VERSION', '1.7.10');
 }
 
 require_once('classes/class-days-on-market.php');

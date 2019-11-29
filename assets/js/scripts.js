@@ -7,24 +7,21 @@ jQuery('document').ready(function ($) {
     });
 
     // Email Validation
-    if (DaysOnMarket.platformvalidator !== undefined && DaysOnMarket.platformvalidator !== '') {
-        $('#email').platform_email_validator({
-            api_key: DaysOnMarket.platformvalidator,
-            in_progress: function () {
-                $('#email').parent().removeClass('has-warning has-error');
-                $(".mailcheck-suggestion").remove();
-                $("[type=submit]").addClass("disabled").attr("disabled", "disabled");
-            },
-            success: function (data) {
-                $('#email').after(get_suggestion_str(data['is_valid'], data['did_you_mean']));
-            },
-            error: function () {
-                $("[type=submit]").removeClass("disabled").removeAttr("disabled");
-            }
-        });
-    }
+    $('#email').platform_email_validator({
+        in_progress: function () {
+            $('#email').parent().removeClass('has-warning has-error');
+            $(".mailcheck-suggestion").remove();
+            $("[type=submit]").addClass("disabled").attr("disabled", "disabled");
+        },
+        success: function (data) {
+            $('#email').after(get_suggestion_str(data['is_valid'], data['did_you_mean']));
+        },
+        error: function () {
+            $("[type=submit]").removeClass("disabled").removeAttr("disabled");
+        }
+    });
 
-    // Parse Mailgun Responses
+    // Parse email validation Responses
     function get_suggestion_str(is_valid, alternate) {
         if (is_valid) {
             if (alternate) {
